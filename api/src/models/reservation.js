@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 
 const reservationSchema = new Schema(
   {
-    guest: {
-      type: String,
-      required: true,
+    customer: {
+      type: Schema.Types.ObjectId,
+      ref: "Customer"
     },
-    checkinDate: {
+    checkIn: {
       type: Date,
       required: true,
     },
-    checkoutDate: {
+    checkOut: {
       type: Date,
       required: true,
     },
