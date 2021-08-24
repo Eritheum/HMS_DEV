@@ -1,5 +1,5 @@
 {
-  "name": "HMS_DEV",
+  "name": "hms-dev",
   "version": "1.0.0",
   "description": "Developemental build",
   "main": "app.js",

@@ -1,7 +1,7 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const mongoose = require("mongoose");
-const apiSchema = require("./api/src/schema/schema");
+const apiSchema = require("./api/src/schema/index");
 const apiResolvers = require("./api/src/resolvers/index");
 
 const app = express();
