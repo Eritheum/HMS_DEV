@@ -1,4 +1,4 @@
-const Customer = require("../models/customer");
+const Customer = require("../../models/customer/customer");
 
 module.exports = {
    customers: async () => {
@@ -11,7 +11,6 @@ module.exports = {
    },
 
    createCustomer: async (args) => {
-
       const customer = new Customer({
          title: args.customerInput.title,
          firstName: args.customerInput.firstName,

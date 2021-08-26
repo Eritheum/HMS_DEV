@@ -1,7 +1,8 @@
-const Customer = require('../models/customer');
-const ReservationRecord = require('../models/reservation/reservationRecord');
-const Reservation = require('../models/reservation/reservation');
-const Room = require('../models/room/room')
+const Customer = require('../../models/customer/customer')
+const ReservationRecord = require('../../models/reservation/reservationRecord')
+const Reservation = require('../../models/reservation/reservation');
+const Room = require('../../models/room/room')
+const { dateToString } = require('./date')
 
 const customerLookup = async (customerId) => {
    try {
@@ -33,6 +34,10 @@ const reservationRecordLookup = async (records) => {
          const result = await ReservationRecord.findById(record);
          return {
             ...result._doc,
+            checkOut: dateToString(result.checkOut),
+            checkIn: dateToString(result.checkIn),
+            createdAt: dateToString(result.createdAt),
+            updatedAt: dateToString(result.updatedAt),
             room: roomLookup.bind(this, result.room)
          };
       });

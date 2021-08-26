@@ -28,6 +28,7 @@ module.exports = buildSchema(`
       _id: ID!
       email: String!
       password: String
+      role: String
       createdAt: String!
       updatedAt: String!
    }
@@ -103,15 +104,22 @@ module.exports = buildSchema(`
       isHotelPool: Boolean
       roomType: String
    }
+   input UserInput {
+      email: String!
+      password: String!
+      role: String
+   }
    type RootQuery {
       roomTypes: [RoomType!]
       rooms: [Room!]
       bookings: [Booking!]
       reservations: [Reservation!]
       customers: [Customer!]
+      reservationRecords: [ReservationRecord!]
       login(email: String!, password: String!): AuthData
     }
     type RootMutation {
+       createUser(userInput: UserInput):User
        createRoomType(roomTypeInput: RoomTypeInput):RoomType
        createRoom(roomInput: RoomInput): Room
        createReservationRecord(reservationRecordInput: ReservationRecordInput):ReservationRecord

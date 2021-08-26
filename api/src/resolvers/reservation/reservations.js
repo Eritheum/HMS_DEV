@@ -1,9 +1,12 @@
 const Reservation = require('../../models/reservation/reservation');
-const { customerLookup, reservationRecordLookup } = require("../../helpers/lookups");
-const { createReservationRecord } = require('./reservationRecords')
+const { customerLookup, reservationRecordLookup } = require("../helpers/lookups");
+const { createReservationRecord } = require('./reservationRecords');
 
 module.exports = {
-  reservations: async () => {
+  reservations: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Unauthenticated")
+    }
     try {
       const reservations = await Reservation.find();
       return reservations.map((result) => {
@@ -21,7 +24,10 @@ module.exports = {
     this function will call the createReservationRecord() to create a record for each reservation
     with the checkIn & checkOut date.
   *********/
-  createReservation: async (args) => {
+  createReservation: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error("Unauthenticated")
+    }
     const reservationInput = {
       checkIn: args.checkIn,
       checkOut: args.checkOut,
@@ -32,7 +38,7 @@ module.exports = {
     const reservation = new Reservation({
       customer: reservationInput.customer,
       numberOfGuest: reservationInput.numberOfGuest,
-      reservationRecords: (await createReservationRecord(reservationInput)).id,
+      reservationRecords: (await createReservationRecord(reservationInput, req)).id,
     });
     try {
       const result = await reservation.save();
