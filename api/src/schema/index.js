@@ -3,6 +3,7 @@ const { buildSchema } = require("graphql");
 module.exports = buildSchema(`
    type Booking {
       _id: ID!
+      bookingNumber: String!
       createdAt: String!
       updatedAt: String!
       customer: Customer!
@@ -10,6 +11,7 @@ module.exports = buildSchema(`
    }
    type Reservation {
       _id: ID!
+      reservationNumber: String!
       customer: Customer!
       numberOfGuest: Int!
       reservationRecords: [ReservationRecord!]

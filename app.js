@@ -3,23 +3,22 @@ const { graphqlHTTP } = require("express-graphql");
 const mongoose = require("mongoose");
 const apiSchema = require("./api/src/schema/index");
 const apiResolvers = require("./api/src/resolvers/index");
-const cors = require("cors");
 const isAuth = require("./api/middleware/is-auth");
 
 const app = express();
-
-// const corsOptions = {
-//   origin: "http://localhost:8001"
-// }
-
-// app.use(cors(corsOptions))
 
 app.use(express.json());
 
 app.use(isAuth);
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my new personal booking system." });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
 });
 
 app.use(

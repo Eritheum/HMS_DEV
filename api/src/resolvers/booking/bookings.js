@@ -2,6 +2,7 @@ const Booking = require("../../models/booking/booking");
 const { createReservation } = require("../reservation/reservations");
 const { reservationLookup, customerLookup } = require("../helpers/lookups");
 const { dateToString } = require("../helpers/date");
+const { RandomNumber } = require("../helpers/random");
 
 module.exports = {
   bookings: async (args, req) => {
@@ -30,6 +31,7 @@ module.exports = {
     try {
       const booking = new Booking({
         customer: args.bookingInput.customer,
+        bookingNumber: RandomNumber(),
       });
       /*** parsing the the array of [ReserationInput] and sending it to createReservation() 
          to get back a new Reservation ***/
