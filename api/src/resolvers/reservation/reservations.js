@@ -8,9 +8,9 @@ const { RandomNumber } = require("../helpers/random");
 
 module.exports = {
   reservations: async (args, req) => {
-    if (!req.isAuth) {
-      throw new Error("Unauthenticated");
-    }
+    // if (!req.isAuth) {
+    //   throw new Error("Unauthenticated");
+    // }
     try {
       const reservations = await Reservation.find();
       return reservations.map((result) => {
