@@ -1,8 +1,8 @@
 {
 
    "env": {
-      "MONGO_USER": "eritheum",
-      "MONGO_PASSWORD": "XEvi9EQ1ipL6FvIu",
+      "MONGO_USER": "",
+      "MONGO_PASSWORD": "",
       "MONGO_DB": "HMS_DB"
    }
 
